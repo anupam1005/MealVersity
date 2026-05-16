@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { Image } from 'expo-image';
 
 const COLORS = {
   white: '#FFFFFF',
@@ -9,18 +10,31 @@ const COLORS = {
 const CATEGORIES = [
   { id: '1', title: 'Biryani', image: 'https://images.unsplash.com/photo-1589302168068-964664d93cb0?w=200&auto=format&fit=crop' },
   { id: '2', title: 'Noodles', image: 'https://images.unsplash.com/photo-1552611052-33e04de081de?w=200&auto=format&fit=crop' },
-  { id: '3', title: 'Sandwich', image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=200&auto=format&fit=crop' },
+  { id: '3', title: 'Thali', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&auto=format&fit=crop' },
   { id: '4', title: 'Momos', image: 'https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?w=200&auto=format&fit=crop' },
   { id: '5', title: 'Burger', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop' },
 ];
 
 export default function CategoryList() {
+  const handleCategoryPress = (title: string) => {
+    Alert.alert('Category Selected', `Showing results for ${title}`);
+  };
+
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.categoriesContainer}>
       {CATEGORIES.map(cat => (
-        <TouchableOpacity key={cat.id} style={styles.categoryItem}>
+        <TouchableOpacity 
+          key={cat.id} 
+          style={styles.categoryItem}
+          onPress={() => handleCategoryPress(cat.title)}
+        >
           <View style={styles.categoryImageContainer}>
-            <Image source={{ uri: cat.image }} style={styles.categoryImage} />
+            <Image 
+              source={{ uri: cat.image }} 
+              style={styles.categoryImage} 
+              contentFit="cover"
+              transition={300}
+            />
           </View>
           <Text style={styles.categoryText}>{cat.title}</Text>
         </TouchableOpacity>

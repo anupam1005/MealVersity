@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 
 const COLORS = {
   secondary: '#E89001',
@@ -7,6 +9,8 @@ const COLORS = {
 };
 
 export default function HeroBanner({ backgroundColor = '#1E9A53' }: { backgroundColor?: string }) {
+  const router = useRouter();
+
   return (
     <View style={[styles.heroBanner, { backgroundColor }]}>
       <View style={styles.heroTextContent}>
@@ -15,14 +19,18 @@ export default function HeroBanner({ backgroundColor = '#1E9A53' }: { background
         <View style={styles.heroOfferBadge}>
           <Text style={styles.heroOfferText}>20% OFF | FREE DELIVERY</Text>
         </View>
-        <TouchableOpacity style={styles.orderNowBtn}>
+        <TouchableOpacity 
+          style={styles.orderNowBtn} 
+          onPress={() => router.push('/restaurant-menu')}
+        >
           <Text style={styles.orderNowText}>ORDER NOW</Text>
         </TouchableOpacity>
       </View>
       <Image 
         source={{ uri: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=600&auto=format&fit=crop' }} 
         style={styles.heroImage} 
-        resizeMode="cover"
+        contentFit="cover"
+        transition={300}
       />
     </View>
   );

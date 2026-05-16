@@ -10,6 +10,7 @@ import FilterChips from '../../components/home/FilterChips';
 import SectionHeader from '../../components/home/SectionHeader';
 import FoodCard from '../../components/home/FoodCard';
 import RestaurantCard from '../../components/home/RestaurantCard';
+import FloatingCart from '../../components/cart/FloatingCart';
 
 const COLORS = {
   primary: '#2ECC71',
@@ -18,9 +19,9 @@ const COLORS = {
 };
 
 const SPECIAL_OFFERS = [
-  { id: '1', title: 'Chole Bhature', price: '₹69', image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&auto=format&fit=crop', tag: 'Bestseller' },
-  { id: '2', title: 'Chicken Salad', price: '₹89', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&auto=format&fit=crop', tag: 'HOT' },
-  { id: '3', title: 'Paneer Tikka', price: '₹120', image: 'https://images.unsplash.com/photo-1599487405270-8b438f42fa03?w=400&auto=format&fit=crop', tag: 'HOT' },
+  { id: '1', title: 'Chole Bhature', price: '₹69', image: 'https://images.unsplash.com/photo-1626132646529-5aa212ddbae4?q=80&w=400&auto=format&fit=crop', tag: 'Bestseller' },
+  { id: '2', title: 'Chicken Salad', price: '₹89', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop', tag: 'HOT' },
+  { id: '3', title: 'Paneer Tikka', price: '₹120', image: 'https://images.unsplash.com/photo-1599487405270-8b438f42fa03?q=80&w=400&auto=format&fit=crop', tag: 'HOT' },
 ];
 
 const RESTAURANTS = [
@@ -102,6 +103,7 @@ export default function DeliveryScreen() {
         {/* Spacer for bottom tab bar */}
         <View style={{ height: 110 }} />
       </ScrollView>
+      <FloatingCart />
     </SafeAreaView>
   );
 }

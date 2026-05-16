@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Image } from 'expo-image';
 
 const COLORS = {
   primary: '#2ECC71',
@@ -33,6 +34,13 @@ export default function HorizontalFoodCard({
   image,
   isVeg = true,
 }: HorizontalFoodCardProps) {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleAdd = () => {
+    setQuantity(1);
+    Alert.alert('Added', `${title} added to cart`);
+  };
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.infoContainer}>
@@ -55,20 +63,33 @@ export default function HorizontalFoodCard({
       </View>
 
       <View style={styles.imageContainer}>
-        <Image source={{ uri: image }} style={styles.image} />
+        <Image 
+          source={{ uri: image }} 
+          style={styles.image} 
+          contentFit="cover"
+          transition={300}
+        />
         <View style={styles.typeTag}>
           <View style={[styles.typeDot, { backgroundColor: isVeg ? COLORS.primary : '#E63946' }]} />
         </View>
         
         {/* Quantity Controls */}
-        <View style={styles.quantityContainer}>
-          <TouchableOpacity style={styles.qtyBtn}>
-            <Text style={styles.qtyBtnText}>-</Text>
-          </TouchableOpacity>
-          <Text style={styles.qtyText}>1</Text>
-          <TouchableOpacity style={styles.qtyBtn}>
-            <Text style={styles.qtyBtnText}>+</Text>
-          </TouchableOpacity>
+        <View style={styles.quantityContainerWrapper}>
+          {quantity === 0 ? (
+            <TouchableOpacity style={styles.addButton} onPress={handleAdd}>
+              <Text style={styles.addButtonText}>ADD</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.quantityContainer}>
+              <TouchableOpacity style={styles.qtyBtn} onPress={() => setQuantity(Math.max(0, quantity - 1))}>
+                <Text style={styles.qtyBtnText}>-</Text>
+              </TouchableOpacity>
+              <Text style={styles.qtyText}>{quantity}</Text>
+              <TouchableOpacity style={styles.qtyBtn} onPress={() => setQuantity(quantity + 1)}>
+                <Text style={styles.qtyBtnText}>+</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     </View>
@@ -83,6 +104,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
     borderStyle: 'dashed',
+    paddingHorizontal: 4,
   },
   infoContainer: {
     flex: 1,
@@ -135,12 +157,12 @@ const styles = StyleSheet.create({
     width: 130,
     height: 100,
     position: 'relative',
+    alignItems: 'center',
   },
   image: {
     width: '100%',
     height: '100%',
     borderRadius: 12,
-    resizeMode: 'cover',
   },
   typeTag: {
     position: 'absolute',
@@ -151,16 +173,37 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderColor: '#E5E7EB',
+    zIndex: 2,
   },
   typeDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
   },
-  quantityContainer: {
+  quantityContainerWrapper: {
     position: 'absolute',
-    bottom: -15,
-    alignSelf: 'center',
+    bottom: -12,
+    zIndex: 3,
+  },
+  addButton: {
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 20,
+    paddingVertical: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: COLORS.secondary,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  addButtonText: {
+    color: COLORS.secondary,
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  quantityContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.secondary,
@@ -172,6 +215,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 3,
+    minWidth: 80,
+    justifyContent: 'space-between',
   },
   qtyBtn: {
     paddingHorizontal: 8,

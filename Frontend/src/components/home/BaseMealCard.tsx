@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 
 interface BaseMealCardProps {
   title: string;
@@ -8,8 +10,14 @@ interface BaseMealCardProps {
 }
 
 export default function BaseMealCard({ title, price, image }: BaseMealCardProps) {
+  const router = useRouter();
+
   return (
-    <TouchableOpacity style={styles.cardContainer} activeOpacity={0.8}>
+    <TouchableOpacity 
+      style={styles.cardContainer} 
+      activeOpacity={0.8}
+      onPress={() => router.push('/restaurant-menu')}
+    >
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.priceContainer}>
@@ -17,7 +25,12 @@ export default function BaseMealCard({ title, price, image }: BaseMealCardProps)
           <Text style={styles.price}>{price}</Text>
         </View>
       </View>
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image 
+        source={{ uri: image }} 
+        style={styles.image} 
+        contentFit="cover"
+        transition={300}
+      />
     </TouchableOpacity>
   );
 }
@@ -64,6 +77,5 @@ const styles = StyleSheet.create({
     right: -10,
     bottom: -10,
     borderRadius: 40,
-    resizeMode: 'cover',
   },
 });

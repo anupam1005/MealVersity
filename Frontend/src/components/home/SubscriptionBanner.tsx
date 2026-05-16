@@ -1,9 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function SubscriptionBanner() {
+  const router = useRouter();
+
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.9}>
+    <TouchableOpacity 
+      style={styles.container} 
+      activeOpacity={0.9}
+      onPress={() => router.push('/(tabs)/subscription')}
+    >
       <View style={styles.leftContent}>
         <Text style={styles.title}>SAVE BIG ON</Text>
         <Text style={styles.subtitle}>SUBSCRIPTION</Text>

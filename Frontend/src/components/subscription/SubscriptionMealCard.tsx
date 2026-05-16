@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 
 interface SubscriptionMealCardProps {
@@ -34,7 +35,12 @@ export default function SubscriptionMealCard({
       activeOpacity={0.9}
       onPress={() => router.push(`/subscription/${id}`)}
     >
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image 
+        source={{ uri: image }} 
+        style={styles.image} 
+        contentFit="cover"
+        transition={300}
+      />
       
       <View style={styles.contentContainer}>
         {/* Kitchen Name & Rating */}
@@ -85,7 +91,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 180,
-    resizeMode: 'cover',
   },
   contentContainer: {
     padding: 16,

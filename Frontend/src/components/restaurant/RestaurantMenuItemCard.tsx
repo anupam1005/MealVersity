@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useCart } from '../../context/CartContext';
 
 const COLORS = {
   primary: '#2ECC71',
@@ -34,6 +35,18 @@ export default function RestaurantMenuItemCard({
   isVeg = true,
 }: RestaurantMenuItemCardProps) {
   const [quantity, setQuantity] = useState(0);
+  const { addToCart } = useCart();
+
+  const handleIncrement = () => {
+    setQuantity(prev => prev + 1);
+    addToCart();
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 0) {
+      setQuantity(prev => prev - 1);
+    }
+  };
 
   return (
     <View style={styles.cardContainer}>
@@ -68,16 +81,16 @@ export default function RestaurantMenuItemCard({
         {/* Quantity Controls - Prominent Green */}
         <View style={styles.quantityContainerWrapper}>
           {quantity === 0 ? (
-            <TouchableOpacity style={styles.addButton} onPress={() => setQuantity(1)}>
+            <TouchableOpacity style={styles.addButton} onPress={handleIncrement}>
               <Text style={styles.addButtonText}>ADD</Text>
             </TouchableOpacity>
           ) : (
             <View style={styles.quantityContainer}>
-              <TouchableOpacity style={styles.qtyBtn} onPress={() => setQuantity(Math.max(0, quantity - 1))}>
+              <TouchableOpacity style={styles.qtyBtn} onPress={handleDecrement}>
                 <Text style={styles.qtyBtnText}>-</Text>
               </TouchableOpacity>
               <Text style={styles.qtyText}>{quantity}</Text>
-              <TouchableOpacity style={styles.qtyBtn} onPress={() => setQuantity(quantity + 1)}>
+              <TouchableOpacity style={styles.qtyBtn} onPress={handleIncrement}>
                 <Text style={styles.qtyBtnText}>+</Text>
               </TouchableOpacity>
             </View>

@@ -10,6 +10,7 @@ import BaseMealCard from '../../components/home/BaseMealCard';
 import SubscriptionBanner from '../../components/home/SubscriptionBanner';
 import FilterChips from '../../components/home/FilterChips';
 import HorizontalFoodCard from '../../components/home/HorizontalFoodCard';
+import FloatingCart from '../../components/cart/FloatingCart';
 
 const COLORS = {
   primary: '#2ECC71',
@@ -19,13 +20,13 @@ const COLORS = {
 };
 
 const SPECIAL_OFFERS = [
-  { id: '1', title: 'Chole Bhature', price: '₹69', image: 'https://images.unsplash.com/photo-1589302168068-964664d93cb0?w=400&auto=format&fit=crop', tag: 'Bestseller' },
-  { id: '2', title: 'Chicken Salad', price: '₹89', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&auto=format&fit=crop', tag: 'HOT' },
+  { id: '1', title: 'Chole Bhature', price: '₹69', image: 'https://images.unsplash.com/photo-1626132646529-5aa212ddbae4?q=80&w=400&auto=format&fit=crop', tag: 'Bestseller' },
+  { id: '2', title: 'Chicken Salad', price: '₹89', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop', tag: 'HOT' },
 ];
 
 const BASE_MEALS = [
-  { id: '1', title: 'Veg Thali', price: '₹69', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&auto=format&fit=crop' },
-  { id: '2', title: 'Non-Veg Thali', price: '₹129', image: 'https://images.unsplash.com/photo-1628294895950-9805252327bc?w=400&auto=format&fit=crop' },
+  { id: '1', title: 'Veg Thali', price: '₹69', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=400&auto=format&fit=crop' },
+  { id: '2', title: 'Non-Veg Thali', price: '₹129', image: 'https://images.unsplash.com/photo-1628294895950-9805252327bc?q=80&w=400&auto=format&fit=crop' },
 ];
 
 const TOP_FOODS = [
@@ -37,29 +38,29 @@ const TOP_FOODS = [
     description: '4 Bhature served with rich, thick, masaledar chole ...',
     originalPrice: '89',
     price: '69',
-    image: 'https://images.unsplash.com/photo-1589302168068-964664d93cb0?w=400&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1626132646529-5aa212ddbae4?q=80&w=400&auto=format&fit=crop',
     isVeg: true,
   },
   {
     id: '2',
-    title: 'Chole Bhature',
-    rating: '4.7',
-    reviews: '2.3K+',
-    description: '4 Bhature served with rich, thick, masaledar chole ...',
-    originalPrice: '89',
-    price: '69',
-    image: 'https://images.unsplash.com/photo-1589302168068-964664d93cb0?w=400&auto=format&fit=crop',
+    title: 'Dal Makhani',
+    rating: '4.5',
+    reviews: '1.2K+',
+    description: 'Slow cooked black lentils with butter and cream.',
+    originalPrice: '150',
+    price: '120',
+    image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=400&auto=format&fit=crop',
     isVeg: true,
   },
   {
     id: '3',
-    title: 'Chole Bhature',
-    rating: '4.7',
-    reviews: '2.3K+',
-    description: '4 Bhature served with rich, thick, masaledar chole ...',
-    originalPrice: '89',
-    price: '69',
-    image: 'https://images.unsplash.com/photo-1589302168068-964664d93cb0?w=400&auto=format&fit=crop',
+    title: 'Chicken Curry',
+    rating: '4.6',
+    reviews: '3.1K+',
+    description: 'Homestyle chicken curry with spicy gravy.',
+    originalPrice: '180',
+    price: '160',
+    image: 'https://images.unsplash.com/photo-1603894584711-73dc18805738?q=80&w=400&auto=format&fit=crop',
     isVeg: false,
   },
 ];
@@ -129,6 +130,7 @@ export default function KitchenScreen() {
         {/* Spacer for bottom tab bar */}
         <View style={{ height: 110 }} />
       </ScrollView>
+      <FloatingCart />
     </SafeAreaView>
   );
 }

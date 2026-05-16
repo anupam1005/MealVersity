@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import RestaurantFilterChips from '../components/restaurant/RestaurantFilterChips';
 import RestaurantMenuItemCard from '../components/restaurant/RestaurantMenuItemCard';
 import { Image } from 'expo-image';
+import FloatingCart from '../components/cart/FloatingCart';
 
 const COLORS = {
   primary: '#2ECC71',
@@ -100,29 +101,7 @@ export default function RestaurantMenuScreen() {
         </View>
       </ScrollView>
 
-      {/* Sticky Floating Checkout */}
-      <View style={[styles.floatingCheckout, { paddingBottom: Math.max(insets.bottom, 16) }]}>
-        <View style={styles.floatingCheckoutInner}>
-          <View style={styles.cartInfo}>
-            <Image 
-              source={{ uri: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&q=80&w=100' }} 
-              style={styles.cartAvatar} 
-            />
-            <View>
-              <Text style={styles.cartItemsText}>1 Item in cart</Text>
-              <Text style={styles.viewCartText}>View Cart</Text>
-            </View>
-          </View>
-          <View style={styles.cartActions}>
-            <TouchableOpacity style={styles.trashBtn}>
-              <Ionicons name="trash-outline" size={20} color="#E63946" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.checkoutBtn} onPress={() => router.push('/cart')}>
-              <Text style={styles.checkoutBtnText}>CHECKOUT</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+      <FloatingCart bottomOffset={insets.bottom + 16} />
     </View>
   );
 }

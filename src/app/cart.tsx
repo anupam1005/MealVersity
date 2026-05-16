@@ -99,7 +99,7 @@ export default function CartScreen() {
               <Ionicons name="chevron-up" size={16} color={COLORS.textDark} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.payBtn}>
+          <TouchableOpacity style={styles.payBtn} onPress={() => router.push('/tracking/success')}>
             <Text style={styles.payBtnText}>Pay ₹350</Text>
           </TouchableOpacity>
         </View>

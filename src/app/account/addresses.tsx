@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Tex
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-import MapView, { Marker, PROVIDER_DEFAULT } from 'react-native-maps';
+import AppMap, { Marker, PROVIDER_DEFAULT } from '../../components/common/AppMap';
 
 import AddressCard from '../../components/account/AddressCard';
 
@@ -76,7 +76,7 @@ export default function AddressesScreen() {
           <Text style={styles.sheetTitle}>Add New Address</Text>
           
           <View style={styles.mapContainer}>
-             <MapView
+             <AppMap
                provider={PROVIDER_DEFAULT}
                style={styles.map}
                initialRegion={{
@@ -87,7 +87,7 @@ export default function AddressesScreen() {
                }}
              >
                <Marker coordinate={{ latitude: 28.6139, longitude: 77.2090 }} />
-             </MapView>
+             </AppMap>
              <View style={styles.mapOverlay}>
                 <Text style={styles.mapOverlayText}>Move pin to exact location</Text>
              </View>

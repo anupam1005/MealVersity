@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Platform, StatusBar } from 'react-native';
-import MapView, { Marker, PROVIDER_DEFAULT } from 'react-native-maps';
+import AppMap, { Marker, PROVIDER_DEFAULT } from '../../components/common/AppMap';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -34,7 +34,7 @@ export default function LiveTrackingScreen() {
   return (
     <View style={styles.container}>
       {/* Map View */}
-      <MapView
+      <AppMap
         provider={PROVIDER_DEFAULT}
         style={styles.map}
         initialRegion={{
@@ -45,7 +45,7 @@ export default function LiveTrackingScreen() {
         }}
       >
         <Marker coordinate={{ latitude: 28.6139, longitude: 77.2090 }} />
-      </MapView>
+      </AppMap>
 
       {/* Floating Back Button */}
       <View style={[styles.headerSafeArea, { paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : insets.top }]}>

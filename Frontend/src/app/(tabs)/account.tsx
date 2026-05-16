@@ -56,10 +56,10 @@ export default function AccountScreen() {
         <ProfileMenuSection 
           title="Support"
           items={[
-            { title: 'Contact Us', onPress: () => Linking.openURL('tel:+911234567890') },
-            { title: 'About Us', onPress: () => Alert.alert('About MealVersity', 'MealVersity is your go-to food delivery and subscription app. Version 1.0.0') },
+            { title: 'Contact Us', route: '/account/contact' },
+            { title: 'About Us', route: '/account/about' },
             { title: 'Rate Us / Share This App', onPress: () => Alert.alert('Rate Us', 'Thank you for using MealVersity! We appreciate your feedback.') },
-            { title: 'Terms And Conditions', onPress: () => Alert.alert('Terms & Conditions', 'By using MealVersity, you agree to our terms and conditions.') },
+            { title: 'Terms And Conditions', route: '/account/terms' },
           ]}
         />
 

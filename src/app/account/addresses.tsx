@@ -5,6 +5,8 @@ import { useRouter } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import MapView, { Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 
+import AddressCard from '../../components/account/AddressCard';
+
 const COLORS = {
   primary: '#2ECC71',
   white: '#FFFFFF',
@@ -51,18 +53,7 @@ export default function AddressesScreen() {
 
       <ScrollView style={styles.content} contentContainerStyle={{ padding: 16 }}>
         {SAVED_ADDRESSES.map((item) => (
-          <View key={item.id} style={styles.addressCard}>
-            <View style={styles.iconContainer}>
-              <Ionicons name={item.icon} size={24} color={COLORS.textDark} />
-            </View>
-            <View style={styles.addressInfo}>
-              <Text style={styles.addressType}>{item.type}</Text>
-              <Text style={styles.addressText}>{item.address}</Text>
-            </View>
-            <TouchableOpacity style={styles.optionsBtn}>
-              <Ionicons name="ellipsis-vertical" size={20} color={COLORS.textLight} />
-            </TouchableOpacity>
-          </View>
+          <AddressCard key={item.id} item={item} />
         ))}
 
         <TouchableOpacity style={styles.addButton} onPress={openAddAddressSheet}>
@@ -168,37 +159,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  addressCard: {
-    flexDirection: 'row',
-    backgroundColor: COLORS.white,
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    marginBottom: 12,
-    alignItems: 'flex-start',
-  },
-  iconContainer: {
-    marginRight: 16,
-    marginTop: 2,
-  },
-  addressInfo: {
-    flex: 1,
-  },
-  addressType: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: COLORS.textDark,
-    marginBottom: 4,
-  },
-  addressText: {
-    fontSize: 14,
-    color: COLORS.textLight,
-    lineHeight: 20,
-  },
-  optionsBtn: {
-    padding: 4,
   },
   addButton: {
     flexDirection: 'row',

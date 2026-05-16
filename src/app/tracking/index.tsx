@@ -7,6 +7,9 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BillDetails from '../../components/cart/BillDetails';
 
+import TrackingProgressCard from '../../components/tracking/TrackingProgressCard';
+import RiderInfoFooter from '../../components/tracking/RiderInfoFooter';
+
 const COLORS = {
   primary: '#2ECC71',
   white: '#FFFFFF',
@@ -60,16 +63,12 @@ export default function LiveTrackingScreen() {
       >
         <BottomSheetScrollView style={styles.sheetContent} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
           {/* Progress Bar Block */}
-          <View style={styles.progressBlock}>
-            <View style={styles.progressHeader}>
-              <Text style={styles.progressStatus}>ORDER PREPARING</Text>
-              <Text style={styles.progressTime}>Arriving in 25 mins</Text>
-            </View>
-            <View style={styles.progressBarBg}>
-              <View style={[styles.progressBarFill, { width: '40%' }]} />
-            </View>
-            <Text style={styles.progressDesc}>Your food is being prepared at Maya Restaurant.</Text>
-          </View>
+          <TrackingProgressCard 
+            status="ORDER PREPARING"
+            time="Arriving in 25 mins"
+            progress={40}
+            description="Your food is being prepared at Maya Restaurant."
+          />
 
           {/* Need Help Button */}
           <TouchableOpacity style={styles.helpButton}>
@@ -105,20 +104,11 @@ export default function LiveTrackingScreen() {
       </BottomSheet>
 
       {/* Sticky Rider Info Footer */}
-      <View style={[styles.riderFooter, { paddingBottom: Math.max(insets.bottom, 16) }]}>
-        <View style={styles.riderAvatarContainer}>
-          <View style={styles.avatarPlaceholder}>
-             <MaterialCommunityIcons name="bike" size={24} color={COLORS.white} />
-          </View>
-        </View>
-        <View style={styles.riderInfo}>
-          <Text style={styles.riderName}>Rahul Kumar</Text>
-          <Text style={styles.riderLang}>Speaks Hindi, English</Text>
-        </View>
-        <TouchableOpacity style={styles.callButton}>
-          <Ionicons name="call" size={20} color={COLORS.white} />
-        </TouchableOpacity>
-      </View>
+      <RiderInfoFooter 
+        name="Rahul Kumar"
+        languages="Speaks Hindi, English"
+        paddingBottom={insets.bottom}
+      />
 
       {/* Delivered Modal */}
       <Modal visible={deliveredModalVisible} transparent animationType="fade">
@@ -177,46 +167,6 @@ const styles = StyleSheet.create({
   sheetContent: {
     flex: 1,
     paddingHorizontal: 16,
-  },
-  progressBlock: {
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-  },
-  progressHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  progressStatus: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: COLORS.primary,
-  },
-  progressTime: {
-    fontSize: 14,
-    color: COLORS.textDark,
-    fontWeight: '600',
-  },
-  progressBarBg: {
-    height: 8,
-    backgroundColor: COLORS.border,
-    borderRadius: 4,
-    marginBottom: 12,
-    overflow: 'hidden',
-  },
-  progressBarFill: {
-    height: '100%',
-    backgroundColor: COLORS.primary,
-    borderRadius: 4,
-  },
-  progressDesc: {
-    fontSize: 13,
-    color: COLORS.textLight,
   },
   helpButton: {
     flexDirection: 'row',
@@ -284,56 +234,6 @@ const styles = StyleSheet.create({
   simulateBtnText: {
     color: COLORS.textDark,
     fontWeight: 'bold',
-  },
-  riderFooter: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: COLORS.white,
-    borderTopWidth: 1,
-    borderTopColor: COLORS.border,
-    paddingTop: 16,
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 10,
-  },
-  riderAvatarContainer: {
-    marginRight: 12,
-  },
-  avatarPlaceholder: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: COLORS.textLight,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  riderInfo: {
-    flex: 1,
-  },
-  riderName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: COLORS.textDark,
-  },
-  riderLang: {
-    fontSize: 12,
-    color: COLORS.textLight,
-    marginTop: 2,
-  },
-  callButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: COLORS.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   modalOverlay: {
     flex: 1,

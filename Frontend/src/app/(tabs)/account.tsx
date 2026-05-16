@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform, StatusBar, Alert, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ProfileMenuSection from '../../components/account/ProfileMenuSection';
@@ -46,20 +46,20 @@ export default function AccountScreen() {
           title="Account"
           items={[
             { title: 'My Orders', route: '/account/orders' },
-            { title: 'Subscriptions' },
+            { title: 'Subscriptions', route: '/account/subscriptions' },
             { title: 'Addresses', route: '/account/addresses' },
             { title: 'Referral', route: '/account/referrals' },
-            { title: 'Refunds' },
+            { title: 'Refunds', route: '/account/refunds' },
           ]}
         />
 
         <ProfileMenuSection 
           title="Support"
           items={[
-            { title: 'Contact Us' },
-            { title: 'About Us' },
-            { title: 'Rate Us / Share This App' },
-            { title: 'Terms And Conditions' },
+            { title: 'Contact Us', onPress: () => Linking.openURL('tel:+911234567890') },
+            { title: 'About Us', onPress: () => Alert.alert('About MealVersity', 'MealVersity is your go-to food delivery and subscription app. Version 1.0.0') },
+            { title: 'Rate Us / Share This App', onPress: () => Alert.alert('Rate Us', 'Thank you for using MealVersity! We appreciate your feedback.') },
+            { title: 'Terms And Conditions', onPress: () => Alert.alert('Terms & Conditions', 'By using MealVersity, you agree to our terms and conditions.') },
           ]}
         />
 

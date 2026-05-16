@@ -19,9 +19,8 @@ export default function SubscriptionDetailsScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
-  // We could fetch real data based on ID, but we'll mock it for the UI
   const details = {
-    kitchenName: 'Sweet Express', // from prompt: "with the Kitchen name"
+    kitchenName: 'Sweet Express',
     title: 'Weekly Veg Lunch & Dinner Combo',
     rating: '4.7 (2.3k+) Ratings',
     price: '₹749',
@@ -41,10 +40,14 @@ export default function SubscriptionDetailsScreen() {
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
         <Text style={styles.headerKitchenName}>{details.kitchenName}</Text>
-        <View style={{ width: 60 }} /> {/* Spacer to center the kitchen name slightly */}
+        <View style={styles.headerSpacer} />
       </View>
 
-      <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         <Text style={styles.pageTitle}>Subscription Details</Text>
 
         {/* Hero Image Section */}
@@ -62,8 +65,13 @@ export default function SubscriptionDetailsScreen() {
           {/* Tags */}
           <View style={styles.tagsContainer}>
             {details.tags.map((tag, index) => (
-              <View key={index} style={[styles.tagBadge, tag === 'Pure Veg' ? styles.vegBadge : {}]}>
-                <Text style={[styles.tagText, tag === 'Pure Veg' ? styles.vegTagText : {}]}>{tag}</Text>
+              <View
+                key={index}
+                style={[styles.tagBadge, tag === 'Pure Veg' ? styles.vegBadge : {}]}
+              >
+                <Text style={[styles.tagText, tag === 'Pure Veg' ? styles.vegTagText : {}]}>
+                  {tag}
+                </Text>
               </View>
             ))}
           </View>
@@ -95,19 +103,23 @@ export default function SubscriptionDetailsScreen() {
           {/* Meals Accordion */}
           <View style={styles.mealsSection}>
             <Text style={styles.sectionHeading}>Meals</Text>
-            
+
             {/* Lunch Meals Toggle */}
-            <TouchableOpacity 
-              style={styles.accordionHeader} 
+            <TouchableOpacity
+              style={styles.accordionHeader}
               onPress={() => setExpandedSection(expandedSection === 'lunch' ? null : 'lunch')}
             >
               <Text style={styles.accordionTitle}>Lunch Meals</Text>
-              <Ionicons name={expandedSection === 'lunch' ? 'chevron-up' : 'chevron-down'} size={20} color={COLORS.textDark} />
+              <Ionicons
+                name={expandedSection === 'lunch' ? 'chevron-up' : 'chevron-down'}
+                size={20}
+                color={COLORS.textDark}
+              />
             </TouchableOpacity>
 
             {expandedSection === 'lunch' && (
               <View style={styles.accordionContent}>
-                {DAYS_OF_WEEK.map(day => (
+                {DAYS_OF_WEEK.map((day) => (
                   <View key={`lunch-${day}`} style={styles.dayRow}>
                     <Text style={styles.dayText}>{day}</Text>
                     <View style={styles.skeletonBox} />
@@ -117,17 +129,21 @@ export default function SubscriptionDetailsScreen() {
             )}
 
             {/* Dinner Meals Toggle */}
-            <TouchableOpacity 
-              style={styles.accordionHeader} 
+            <TouchableOpacity
+              style={styles.accordionHeader}
               onPress={() => setExpandedSection(expandedSection === 'dinner' ? null : 'dinner')}
             >
               <Text style={styles.accordionTitle}>Dinner Meals</Text>
-              <Ionicons name={expandedSection === 'dinner' ? 'chevron-up' : 'chevron-down'} size={20} color={COLORS.textDark} />
+              <Ionicons
+                name={expandedSection === 'dinner' ? 'chevron-up' : 'chevron-down'}
+                size={20}
+                color={COLORS.textDark}
+              />
             </TouchableOpacity>
 
             {expandedSection === 'dinner' && (
               <View style={styles.accordionContent}>
-                {DAYS_OF_WEEK.map(day => (
+                {DAYS_OF_WEEK.map((day) => (
                   <View key={`dinner-${day}`} style={styles.dayRow}>
                     <Text style={styles.dayText}>{day}</Text>
                     <View style={styles.skeletonBox} />
@@ -135,6 +151,49 @@ export default function SubscriptionDetailsScreen() {
                 ))}
               </View>
             )}
+          </View>
+
+          {/* Action Buttons Section */}
+          <View style={styles.actionSection}>
+            <Text style={styles.sectionHeading}>Manage Subscription</Text>
+
+            <TouchableOpacity style={styles.actionRow} onPress={() => router.push('/account/orders')}>
+              <View style={styles.actionIconBox}>
+                <Ionicons name="receipt-outline" size={20} color={COLORS.primary} />
+              </View>
+              <Text style={styles.actionText}>My Orders</Text>
+              <Ionicons name="chevron-forward" size={18} color={COLORS.textLight} />
+            </TouchableOpacity>
+
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.actionRow}>
+              <View style={styles.actionIconBox}>
+                <Ionicons name="pause-circle-outline" size={20} color={COLORS.secondary} />
+              </View>
+              <Text style={styles.actionText}>Pause Subscription</Text>
+              <Ionicons name="chevron-forward" size={18} color={COLORS.textLight} />
+            </TouchableOpacity>
+
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.actionRow}>
+              <View style={styles.actionIconBox}>
+                <Ionicons name="calendar-outline" size={20} color={COLORS.primary} />
+              </View>
+              <Text style={styles.actionText}>Skip a Day</Text>
+              <Ionicons name="chevron-forward" size={18} color={COLORS.textLight} />
+            </TouchableOpacity>
+
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.actionRow}>
+              <View style={[styles.actionIconBox, { backgroundColor: '#FFF0F0' }]}>
+                <Ionicons name="close-circle-outline" size={20} color="#E63946" />
+              </View>
+              <Text style={[styles.actionText, { color: '#E63946' }]}>Cancel Subscription</Text>
+              <Ionicons name="chevron-forward" size={18} color={COLORS.textLight} />
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -178,11 +237,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.textLight,
   },
+  headerSpacer: {
+    width: 60,
+  },
   container: {
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 100, // Space for sticky footer
+    paddingBottom: 100,
   },
   pageTitle: {
     fontSize: 22,
@@ -196,7 +258,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   heroBackground: {
-    backgroundColor: '#F3A638', // Orange/yellow gradient-like color from design
+    backgroundColor: '#F3A638',
     height: 160,
     borderRadius: 20,
     justifyContent: 'center',
@@ -244,7 +306,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0',
     paddingHorizontal: 10,
     paddingVertical: 4,
-    borderRadius: 12, // More rounded chips in this view
+    borderRadius: 12,
     marginRight: 8,
     marginBottom: 6,
     borderWidth: 1,
@@ -319,7 +381,10 @@ const styles = StyleSheet.create({
     color: COLORS.secondary,
   },
   mealsSection: {
-    marginBottom: 20,
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+    paddingBottom: 20,
   },
   accordionHeader: {
     flexDirection: 'row',
@@ -328,7 +393,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderWidth: 1,
     borderColor: '#F0F0F0',
-    borderRadius: 24, // Pill shape
+    borderRadius: 24,
     paddingHorizontal: 20,
     marginBottom: 10,
   },
@@ -351,7 +416,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
     width: 100,
-    textAlign: 'center',
   },
   skeletonBox: {
     flex: 1,
@@ -359,6 +423,38 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.skeleton,
     borderRadius: 8,
     marginLeft: 15,
+  },
+  actionSection: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    paddingHorizontal: 16,
+    marginBottom: 24,
+  },
+  actionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+  },
+  actionIconBox: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#E8F5E9',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 14,
+  },
+  actionText: {
+    flex: 1,
+    fontSize: 15,
+    color: COLORS.textDark,
+    fontWeight: '500',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#E5E7EB',
   },
   footer: {
     position: 'absolute',
@@ -368,7 +464,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     paddingHorizontal: 20,
     paddingTop: 15,
-    paddingBottom: 30, // Extra padding for safe area bottom
+    paddingBottom: 30,
     borderTopWidth: 1,
     borderTopColor: '#F0F0F0',
     shadowColor: '#000',
